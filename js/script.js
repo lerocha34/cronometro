@@ -4,7 +4,8 @@ let minutes = document.getElementById("minute");
 let hours = document.getElementById("hour");
 let start = document.getElementById("start");
 let clear = document.getElementById("clear");
-let pause = document.getElementById("pause");
+let register = document.getElementById("register");
+let laps = document.getElementById("laps-area");
 
 let countDecimals = 0;
 let countSeconds = 0;
@@ -16,7 +17,12 @@ let counting = false;
 function startCount() {
   if (!counting) {
     counting = true;
+    start.innerHTML = "Pausar";
     intervalId = setInterval(startSeconds, 10);
+  } else {
+    clearInterval(intervalId);
+    counting = false;
+    start.innerHTML = "Recomeçar";
   }
 }
 
@@ -43,13 +49,6 @@ function startSeconds() {
   }
 }
 
-function pauseTime() {
-  if (counting) {
-    clearInterval(intervalId);
-    counting = false;
-  }
-}
-
 function clearTime() {
   clearInterval(intervalId);
   countDecimals = 0;
@@ -62,8 +61,14 @@ function clearTime() {
   minutes.innerHTML = 0;
   hours.innerHTML = 0;
   counting = false;
+  start.innerHTML = "Começar";
+  laps.innerText = "";
+}
+
+function registerCount() {
+  laps.innerHTML += `<li class='laps'>${countHours}:${countMinutes}:${countSeconds}.${countDecimals}</li>`;
 }
 
 start.addEventListener("click", startCount);
-pause.addEventListener("click", pauseTime);
 clear.addEventListener("click", clearTime);
+register.addEventListener("click", registerCount);
