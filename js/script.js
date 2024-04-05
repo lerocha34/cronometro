@@ -52,14 +52,16 @@ function pauseTime() {
 
 function clearTime() {
   clearInterval(intervalId);
+  countDecimals = 0;
   countSeconds = 0;
   countMinutes = 0;
   countHours = 0;
 
+  decimals.innerHTML = 0;
   seconds.innerHTML = 0;
   minutes.innerHTML = 0;
   hours.innerHTML = 0;
-  counting = false; // Certifique-se de marcar como não contando
+  counting = false;
 }
 
 start.addEventListener("click", startCount);
