@@ -1,3 +1,4 @@
+let decimals = document.getElementById("decimal");
 let seconds = document.getElementById("second");
 let minutes = document.getElementById("minute");
 let hours = document.getElementById("hour");
@@ -5,6 +6,7 @@ let start = document.getElementById("start");
 let clear = document.getElementById("clear");
 let pause = document.getElementById("pause");
 
+let countDecimals = 0;
 let countSeconds = 0;
 let countMinutes = 0;
 let countHours = 0;
@@ -14,13 +16,19 @@ let counting = false;
 function startCount() {
   if (!counting) {
     counting = true;
-    intervalId = setInterval(startSeconds, 1000);
+    intervalId = setInterval(startSeconds, 10);
   }
 }
 
 function startSeconds() {
-  countSeconds++;
-  seconds.innerHTML = countSeconds;
+  countDecimals++;
+  decimals.innerHTML = countDecimals;
+  if (countDecimals > 99) {
+    countSeconds++;
+    seconds.innerHTML = countSeconds;
+    decimals.innerHTML = 0;
+    countDecimals = 0;
+  }
   if (countSeconds > 59) {
     countMinutes++;
     minutes.innerHTML = countMinutes;
