@@ -13,6 +13,9 @@ let countMinutes = 0;
 let countHours = 0;
 let intervalId;
 let counting = false;
+function formatNumber(num) {
+  return num < 10 ? "0" + num : num;
+}
 
 function startCount() {
   if (!counting) {
@@ -28,21 +31,21 @@ function startCount() {
 
 function startSeconds() {
   countDecimals++;
-  decimals.innerHTML = countDecimals;
+  decimals.innerHTML = formatNumber(countDecimals);
   if (countDecimals > 99) {
     countSeconds++;
-    seconds.innerHTML = countSeconds;
+    seconds.innerHTML = formatNumber(countSeconds);
     decimals.innerHTML = 0;
     countDecimals = 0;
   }
   if (countSeconds > 59) {
     countMinutes++;
-    minutes.innerHTML = countMinutes;
+    minutes.innerHTML = formatNumber(countMinutes);
     seconds.innerHTML = 0;
     countSeconds = 0;
     if (countMinutes > 59) {
       countHours++;
-      hours.innerHTML = countHours;
+      hours.innerHTML = formatNumber(countHours);
       minutes.innerHTML = 0;
       countMinutes = 0;
     }
@@ -56,17 +59,23 @@ function clearTime() {
   countMinutes = 0;
   countHours = 0;
 
-  decimals.innerHTML = 0;
-  seconds.innerHTML = 0;
-  minutes.innerHTML = 0;
-  hours.innerHTML = 0;
+  decimals.innerHTML = "00";
+  seconds.innerHTML = "00";
+  minutes.innerHTML = "00";
+  hours.innerHTML = "00";
   counting = false;
   start.innerHTML = "Começar";
   laps.innerText = "";
+  document.getElementById("register-title").style.display = "none";
 }
 
 function registerCount() {
-  laps.innerHTML += `<li class='laps'>${countHours}:${countMinutes}:${countSeconds}.${countDecimals}</li>`;
+  laps.innerHTML += `<li class='laps'>${formatNumber(
+    countHours
+  )}:${formatNumber(countMinutes)}:${formatNumber(countSeconds)}.${formatNumber(
+    countDecimals
+  )}</li>`;
+  document.getElementById("register-title").style.display = "block";
 }
 
 start.addEventListener("click", startCount);

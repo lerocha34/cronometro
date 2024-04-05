@@ -57,6 +57,9 @@ main{
     cursor:pointer;
 }
 
+#register-title{
+    display:none;
+}
 .laps{
     font-size:35px;
 }
@@ -64,7 +67,6 @@ main{
 @media (max-width:425px){
     #area{
         width:90vw;
-        background: lightgreen;
-        list-style-type: upper-roman;
+        
     }
 }
